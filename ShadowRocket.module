@@ -1,0 +1,78 @@
+#!name= TestCrack
+#!desc=lemontree dz
+#!desc=Gói script unlock premium cho nhiều app : Locket, YouTube, Spotify, SoundCloud, PicsArt, VSCO, Truecaller, Meitu (Wink), Alight Motion, Documents, Vivacut
+#!author= tutithuybi123
+#!homepage=https://github.com/tutithuybi123/ShadowRocketConfigAll
+
+[General]
+bypass-system = true
+skip-proxy = *.local, *.crashlytics.com
+tun-excluded-routes = 192.168.0.0/16, 10.0.0.0/8, 172.16.0.0/12
+
+[MITM]
+hostname = api.revenuecat.com, buy.itunes.apple.com, api-sub.meitu.com, api.picsart.com, api-mobile.soundcloud.com, spclient.wg.spotify.com, premium*.truecaller.com, sub.store, us-central1-alight-creative.cloudfunctions.net, license.pdfexpert.com, medi.dxzzy321.top, -redirector*.googlevideo.com, *.googlevideo.com, www.youtube.com, s.youtube.com, youtubei.googleapis.com
+skip-server-cert-verify = true
+
+[Script]
+# Meitu Wink VIP
+WinkVipCrack = type=http-response,pattern=^https?:\/\/api-sub\.meitu\.com\/v2\/user\/vip_info_by_group\.json,requires-body=1,max-size=-1,script-path=https://raw.githubusercontent.com/tutithuybi123/ShadowRocketConfigAll/main/js/WinkVipCrack.js,script-update-interval=86400
+
+# YouTube Premium / No ads / Extra
+youtube.response = type=http-response,pattern=^https:\/\/youtubei\.googleapis\.com\/(youtubei\/v1\/(browse|next|player|search|reel\/reel_watch_sequence|guide|account\/get_setting|get_watch))(\?(.*))?$,requires-body=1,max-size=-1,binary-body-mode=1,engine=auto,script-path=https://raw.githubusercontent.com/tutithuybi123/ShadowRocketConfigAll/main/js/youtube.response.js,script-update-interval=86400,argument="{"lyricLang":"{{{lyricLang}}}","captionLang":"{{{captionLang}}}","blockUpload":{{{blockUpload}}},"blockImmersive":{{{blockImmersive}}},"debug":{{{debug}}}}"
+
+# Revenuecat: Locket
+revenuecat-locket = type=http-response,pattern=^https:\/\/api\.revenuecat\.com\/.+\/(receipts$|subscribers\/[^/]+$),requires-body=1,max-size=-1,timeout=60,script-path=https://raw.githubusercontent.com/tutithuybi123/ShadowRocketConfigAll/main/js/Locket_Ohoang7.js,script-update-interval=86400
+
+# Revenuecat: xoá header để tránh check
+deleteHeader = type=http-request,pattern=^https:\/\/api\.revenuecat\.com\/.+\/(receipts|subscribers),timeout=60,script-path=https://raw.githubusercontent.com/tutithuybi123/ShadowRocketConfigAll/main/js/deleteHeader.js,script-update-interval=86400
+
+# Revenuecat: crack chung
+Crack = type=http-response,pattern=^https:\/\/api\.revenuecat\.com\/.+\/(receipts$|subscribers\/[^/]+$),requires-body=1,timeout=5,tag=Crack,script-path=https://raw.githubusercontent.com/tutithuybi123/ShadowRocketConfigAll/main/js/crack.js,script-update-interval=86400
+Crack2 = type=http-response,pattern=^https:\/\/api\.revenuecat\.com\/.+\/(receipts$|subscribers\/[^/]+$),requires-body=1,timeout=5,tag=Crack2,script-path=https://raw.githubusercontent.com/tutithuybi123/ShadowRocketConfigAll/main/js/crack.js,script-update-interval=86400
+Crack_Revenuecat_HTTP = type=http-response,pattern=^https:\/\/api\.revenuecat\.com\/.+\/(receipts$|subscribers\/[^/]+$),requires-body=1,timeout=5,tag=Crack_Revenuecat_HTTP,script-path=https://raw.githubusercontent.com/tutithuybi123/ShadowRocketConfigAll/main/js/crack.js,script-update-interval=86400
+
+# PicsArt
+Picsart = type=http-request,pattern=^https:\/\/api\.picsart\.com\/gw-v2\/shop\/subscription\/apple\/purchases$,requires-body=1,timeout=5,tag=Picsart,script-path=https://raw.githubusercontent.com/tutithuybi123/ShadowRocketConfigAll/main/js/PicsArt.js,script-update-interval=86400
+Picsart_Alt = type=http-request,pattern=^https:\/\/api\.picsart\.com\/gw-v2\/shop\/subscription\/apple\/purchases$,requires-body=1,timeout=5,tag=Picsart_Alt,script-path=https://raw.githubusercontent.com/tutithuybi123/ShadowRocketConfigAll/main/js/PicsArt.js,script-update-interval=86400
+
+# VSCO (x3 cho an toàn giống bản gốc)
+VSCO = type=http-request,pattern=^https:\/\/api\.revenuecat\.com\/.+\/(receipts$|subscribers\/?(.*?)*$),requires-body=1,timeout=5,tag=VSCO,script-path=https://raw.githubusercontent.com/tutithuybi123/ShadowRocketConfigAll/main/js/VSCO.js,script-update-interval=86400
+VSCO_alt = type=http-request,pattern=^https:\/\/api\.revenuecat\.com\/.+\/(receipts$|subscribers\/?(.*?)*$),requires-body=1,timeout=5,tag=VSCO_alt,script-path=https://raw.githubusercontent.com/tutithuybi123/ShadowRocketConfigAll/main/js/VSCO.js,script-update-interval=86400
+VSCO_dup = type=http-request,pattern=^https:\/\/api\.revenuecat\.com\/.+\/(receipts$|subscribers\/?(.*?)*$),requires-body=1,timeout=5,tag=VSCO_dup,script-path=https://raw.githubusercontent.com/tutithuybi123/ShadowRocketConfigAll/main/js/VSCO.js,script-update-interval=86400
+
+# SoundCloud Go+
+SoundCloudGo = type=http-response,pattern=^https:\/\/api-mobile\.soundcloud\.com\/configuration\/ios$,requires-body=1,tag=SoundCloudGo,script-path=https://raw.githubusercontent.com/tutithuybi123/ShadowRocketConfigAll/main/js/soundcloud.js,script-update-interval=86400
+
+# Spotify
+spotify-json = type=http-request,pattern=^https:\/\/spclient\.wg\.spotify\.com\/(artistview\/v1\/artist|album-entity-view\/v2\/album)\/,requires-body=0,script-path=https://raw.githubusercontent.com/tutithuybi123/ShadowRocketConfigAll/main/js/spotify-json.js,script-update-interval=86400
+spotify-proto = type=http-response,pattern=^https:\/\/spclient\.wg\.spotify\.com\/(bootstrap\/v1\/bootstrap|user-customization-service\/v1\/customize)$,requires-body=1,binary-mode=1,max-size=0,script-path=https://raw.githubusercontent.com/tutithuybi123/ShadowRocketConfigAll/main/js/spotify-proto.js,script-update-interval=86400
+spotify-proto-alt = type=http-response,pattern=^https:\/\/spclient\.wg\.spotify\.com\/(bootstrap\/v1\/bootstrap|user-customization-service\/v1\/customize)$,requires-body=1,binary-mode=1,max-size=0,script-path=https://raw.githubusercontent.com/tutithuybi123/ShadowRocketConfigAll/main/js/spotify-proto.js,script-update-interval=86400
+
+# Truecaller
+Truecaller = type=http-response,pattern=^https:\/\/premium-(.+)\.truecaller\.com\/v\d\/(subscriptions|products\/apple),requires-body=1,max-size=0,tag=Truecaller,script-path=https://raw.githubusercontent.com/tutithuybi123/ShadowRocketConfigAll/main/js/truecaller.js,script-update-interval=86400
+
+# Alight Motion
+AlightMotion = type=http-response,pattern=^https:\/\/us-central1-alight-creative\.cloudfunctions\.net\/getAccountStatusAndLicenses$,requires-body=1,timeout=5,tag=AlightMotion,script-path=https://raw.githubusercontent.com/tutithuybi123/ShadowRocketConfigAll/main/js/AlightMotion.js,script-update-interval=86400
+
+# Readdle Documents
+Documents = type=http-request,pattern=^https:\/\/license\.pdfexpert\.com\/api\/2\.0\/documents\/subscription\/refresh,requires-body=1,timeout=5,tag=Documents,script-path=https://raw.githubusercontent.com/tutithuybi123/ShadowRocketConfigAll/main/js/documents.js,script-update-interval=86400
+
+# Vivacut
+Vivacut = type=http-response,pattern=^https:\/\/medi\.dxzzy321\.top\/api\/rest\/commerce\/integrate\/vip\/perform$,requires-body=1,tag=Vivacut,script-path=https://raw.githubusercontent.com/tutithuybi123/ShadowRocketConfigAll/main/js/vivacut.js,script-update-interval=86400
+
+# default arguments (cho YouTube)
+arguments = blockUpload:true,blockImmersive:true,captionLang:zh-Hans,lyricLang:zh-Hans,scriptExecutionEngine:auto,debug:false
+
+[Rule]
+AND,((DOMAIN-SUFFIX,googlevideo.com), (PROTOCOL,UDP)),REJECT
+AND,((DOMAIN,youtubei.googleapis.com), (PROTOCOL,UDP)),REJECT
+
+[Url Rewrite]
+^https?:\/\/[\w-]+\.googlevideo\.com\/(?!(dclk_video_ads|videoplayback\?)).+&oad _ reject-200
+^https?:\/\/(www|s)\.youtube\.com\/api\/stats\/ads _ reject-200
+^https?:\/\/(www|s)\.youtube\.com\/(pagead|ptracking) _ reject-200
+^https?:\/\/s\.youtube\.com\/api\/stats\/qoe\?adcontext _ reject-200
+(^https?:\/\/[\w-]+\.googlevideo\.com\/(?!dclk_video_ads).+?)&ctier=L(&.+?),ctier,(.+) $1$2$3 302
+
+[Map Local]
+^https?:\/\/[\w-]+\.googlevideo\.com\/initplayback.+&oad data-type=text data="" status-code=200
